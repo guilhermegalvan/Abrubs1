@@ -1,14 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 public class Player : MonoBehaviour
 {
     public float speed;
     private Rigidbody2D rb;
     private Vector2 moveAmount;
-
     private Animator anim;
+    public float health;
 
     private void Start(){
         anim = GetComponent<Animator>();
@@ -27,6 +27,12 @@ public class Player : MonoBehaviour
     }
 
     private void FixedUpdate(){
-        rb.MovePosition(rb.position + moveAmount * Time.fixedDeltaTime);
+       rb.MovePosition(rb.position + moveAmount * Time.fixedDeltaTime);
+    }
+    public void TakeDamage(int damageAmount){
+        health -= damageAmount;
+        if (health <= 0){
+            Destroy(gameObject);
+        }
     }
 }
